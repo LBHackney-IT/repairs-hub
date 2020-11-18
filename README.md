@@ -1,24 +1,29 @@
-# README
+# Repairs Hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails / React frontend application for raising repair requests.
 
-Things you may want to cover:
+Depends on the [Repairs API](https://github.com/LBHackney-IT/repairs-api).
 
-* Ruby version
+## Building production docker
 
-* System dependencies
+### Create production docker
 
-* Configuration
+Replace `railsmasterkey` in the command below.
 
-* Database creation
+```sh
+docker build -t repairs-hub-production -f Dockerfile . --build-arg RAILS_MASTER_KEY=railsmasterkey
+```
 
-* Database initialization
+### Run production docker
 
-* How to run the test suite
+Replace `railsmasterkey` in the command below.
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+docker run --rm -it -p 3000:3000 -e DATABASE_URL=postgres://postgres@host.docker.internal:5432/repairs_hub_development -e RAILS_SERVE_STATIC_FILES=true -e RAILS_ENV=production -e RAILS_LOG_TO_STDOUT=true -e RAILS_MASTER_KEY=railsmasterkey repairs-hub-production:latest bundle exec rails s
+```
 
-* Deployment instructions
+### Run production docker bash
 
-* ...
+```sh
+docker run --rm -it -e DATABASE_URL=postgres://postgres@host.docker.internal:5432/repairs_hub_development -e RAILS_SERVE_STATIC_FILES=true -e RAILS_ENV=production -e RAILS_LOG_TO_STDOUT=true repairs-hub-production:latest /bin/bash
+```
