@@ -1,24 +1,53 @@
-# README
+# Repairs Hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Frontend facing application for the [repairs API](https://github.com/LBHackney-IT/repairs-api).
 
-Things you may want to cover:
+| Dependency | Version |
+| ---------- | ------- |
+| Ruby       | 2.7.2   |
+| Rails      | 6.0.3   |
+| Yarn       | 1.15.2  |
 
-* Ruby version
+## Preflight
 
-* System dependencies
+### Clone the project
 
-* Configuration
+```sh
+$ git clone git@github.com:LBHackney-IT/repairs-hub.git
+```
 
-* Database creation
+### First Time Setup
 
-* Database initialization
+#### Install the project's dependencies using bundler:
 
-* How to run the test suite
+```sh
+$ bundle install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+$ yarn install
+```
 
-* Deployment instructions
+#### Environment variables:
 
-* ...
+Create your `.env` file from `.env.sample`. You must add the repairs API endpoint here.
+
+#### Tests
+
+We use Jest for our unit testing library. You can run the full javascript test suite using following command:
+
+```sh
+$ yarn test
+```
+
+#### Start the server:
+
+We have added a `Procfile` and with the help of foreman you are able to run the rails server and webpack dev server both at once
+
+```sh
+$ foreman start
+```
+
+## Github Actions
+
+We use Github Actions as part of our continuous integration process to build, run and test the application.
