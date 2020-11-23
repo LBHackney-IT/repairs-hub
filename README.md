@@ -28,9 +28,21 @@ $ bundle install
 $ yarn install
 ```
 
+### Data base setup
+
+Postgres should be running
+
+```sh
+$ rails db:create
+```
+
+```sh
+$ rails db:migrate
+```
+
 #### Environment variables:
 
-Create your `.env` file from `.env.sample`. You must add the repairs API endpoint here.
+Create your `.env` file from `.env.sample`. You must add the repairs API endpoint here. (example: ENDPOINT_API=http://localhost:3035)
 
 #### Tests
 
