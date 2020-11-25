@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const { ENDPOINT_API } = process.env
+const ENDPOINT_API = "https://hackney-repairs-api.herokuapp.com/api/v1"
 
 export const getProperties = async (params) => {
   const { data } = await axios.get(
