@@ -1,6 +1,8 @@
 import React from 'react'
+import AddressAlerts from './AddressAlerts'
 
-const PropertyDetails = ({ propertyReference, address, hierarchyType }) => (
+const PropertyDetails = ({ propertyReference, address, hierarchyType, cautionaryAlerts }) => (
+
   <div>
     <h1 className="govuk-heading-l">
       {hierarchyType.subTypeDescription}: {address.addressLine}
@@ -8,7 +10,7 @@ const PropertyDetails = ({ propertyReference, address, hierarchyType }) => (
 
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-one-half">
-        <p className="govuk-body-s">
+        <div className="govuk-body-s">
           <span className="govuk-body-xs">
             Property details
           </span>
@@ -29,10 +31,11 @@ const PropertyDetails = ({ propertyReference, address, hierarchyType }) => (
             {address.postalCode}
           </span>
           <br></br>
-        </p>
+          <AddressAlerts cautionaryAlerts={cautionaryAlerts}/>
+        </div>
       </div>
     </div>
-   </div>
+  </div>
 )
 
 export default PropertyDetails
