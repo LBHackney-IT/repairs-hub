@@ -1,4 +1,5 @@
 import React from 'react'
+import authHeader from './auth-header';
 import { getProperties, getProperty } from './properties'
 import mockAxios from './__mocks__/axios'
 
@@ -48,7 +49,8 @@ describe('getProperties', () => {
     expect(response).toEqual(properties)
     expect(mockAxios.get).toHaveBeenCalledTimes(1)
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ENDPOINT_API}/properties/?q=E9 6PT`
+      `${ENDPOINT_API}/properties/?q=E9 6PT`,
+      { headers: authHeader() }
     )
   })
 })
@@ -79,7 +81,8 @@ describe('getProperty', () => {
     expect(response).toEqual(property)
     expect(mockAxios.get).toHaveBeenCalledTimes(1)
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ENDPOINT_API}/properties/00012345`
+      `${ENDPOINT_API}/properties/00012345`,
+      { headers: authHeader() }
     )
   })
 })
