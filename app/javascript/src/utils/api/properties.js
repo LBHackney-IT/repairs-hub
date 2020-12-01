@@ -4,6 +4,7 @@ import authHeader from './auth-header'
 const { ENDPOINT_API } = process.env
 
 export const getProperties = async (params) => {
+  console.log(ENDPOINT_API)
   const { data } = await axios.get(
     `${ENDPOINT_API}/properties/?q=${params}`,
     { headers: authHeader() }
