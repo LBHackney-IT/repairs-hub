@@ -3,22 +3,26 @@ import PropertiesTable from '../Properties/PropertiesTable'
 import Button from '../Form/Button/Button'
 import Spinner from '../Spinner/Spinner'
 import { getProperties } from '../../utils/api/properties'
+import ErrorMessage from '../Errors/ErrorMessage/ErrorMessage'
 
 const Search = () => {
   const [searchParams, setSearchParams] = useState('')
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(false)
   const [searching, setSearching] = useState(true)
+  const [error, setError] = useState()
 
   async function searchForProperties() {
     setLoading(true)
+    setError(null)
 
     try {
       const data = await getProperties(searchParams)
       setProperties(data)
     } catch (e) {
       setProperties(null)
-      console.log('An error has occured:', e)
+      console.log('An error has occured:', e.response)
+      setError(`Oops an error occurred with error status: ${e.response?.status}`)
     }
 
     setLoading(false)
@@ -35,12 +39,16 @@ const Search = () => {
   const renderSearchResults = () => {
     if(properties?.length > 0) {
       return <PropertiesTable properties={properties} />
-    } else {
+    }
+
+    if (!error) {
       return (
-        <div>
-          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible" />
-          <p className="govuk-heading-s">We found {properties.length} matching results</p>
-        </div>
+        <>
+          <div>
+            <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible" />
+            <p className="govuk-heading-s">We found 0 matching results</p>
+          </div>
+        </>
       )
     }
   }
@@ -72,6 +80,7 @@ const Search = () => {
       ) : (
         <>
           {!searching && renderSearchResults()}
+          {error && <ErrorMessage label={error} />}
         </>
       )}
     </div>
